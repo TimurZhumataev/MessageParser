@@ -9,6 +9,7 @@ from telethon import TelegramClient, events
 from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from telethon.errors import UsernameNotOccupiedError, ChannelInvalidError
+from telethon.sessions import StringSession
 
 load_dotenv()
 
@@ -16,8 +17,9 @@ api_id = int(os.getenv("API_ID"))
 api_hash = os.getenv("API_HASH")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 DATABASE_URL = os.getenv("DATABASE_URL")
+SESSION = os.getenv("SESSION")
 
-client = TelegramClient("anon", api_id, api_hash)
+client = TelegramClient(StringSession(os.getenv("SESSION")), api_id, api_hash)
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 db = None
